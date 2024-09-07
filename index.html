@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Handler</title>
+    <title>Proxy Handler with Brave Embed</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -29,6 +29,10 @@
             <button type="submit">Connect</button>
         </form>
         <div id="result" class="result"></div>
+        <div id="braveEmbed" class="embed-container" style="display: none;">
+            <h2>Brave Browser View</h2>
+            <iframe id="braveFrame" src="" width="100%" height="400px"></iframe>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
