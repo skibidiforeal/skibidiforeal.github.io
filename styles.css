@@ -16,7 +16,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-h1 {
+h1, h2 {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -61,4 +61,11 @@ button:hover {
     border-radius: 5px;
     background-color: #333;
     display: none;
+}
+
+.embed-container {
+    margin-top: 20px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
 }
