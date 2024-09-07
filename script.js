@@ -19,4 +19,12 @@ document.getElementById('proxyForm').addEventListener('submit', function(event) 
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = result;
     resultDiv.style.display = 'block';
+
+    // Show Brave embed simulation
+    const braveEmbed = document.getElementById('braveEmbed');
+    braveEmbed.style.display = 'block';
+
+    // Set Brave to load with proxy (simulating loading a URL via proxy)
+    const braveFrame = document.getElementById('braveFrame');
+    braveFrame.src = `https://${host}`;
 });
