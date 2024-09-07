@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Handler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Proxy Handler</h1>
+        <form id="proxyForm">
+            <div class="input-group">
+                <label for="host">IP/Host:</label>
+                <input type="text" id="host" name="host" placeholder="e.g., tor.socks.ipvanish.com" required>
+            </div>
+            <div class="input-group">
+                <label for="port">Port:</label>
+                <input type="text" id="port" name="port" placeholder="e.g., 1080" required>
+            </div>
+            <div class="input-group">
+                <label for="username">Username (optional):</label>
+                <input type="text" id="username" name="username" placeholder="Proxy username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password (optional):</label>
+                <input type="password" id="password" name="password" placeholder="Proxy password">
+            </div>
+            <button type="submit">Connect</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
