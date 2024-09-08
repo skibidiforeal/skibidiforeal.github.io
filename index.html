@@ -7,18 +7,19 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #1e1e3f;
+            color: #ffffff;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #0078d4;
+            background-color: #4b0082;
             padding: 15px;
             color: white;
             text-align: left;
             font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         header h1 {
@@ -32,45 +33,49 @@
 
         .sidebar {
             width: 250px;
-            background-color: #f3f2f1;
+            background-color: #3a3a65;
             height: 100vh;
             position: fixed;
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
         }
 
         .sidebar a {
             display: block;
             margin: 10px 0;
             text-decoration: none;
-            color: #0078d4;
+            color: #d3d3ff;
             padding: 10px;
             border-radius: 4px;
+            font-size: 16px;
         }
 
         .sidebar a:hover {
-            background-color: #e1e1e1;
+            background-color: #6a5acd;
+            color: white;
         }
 
         .content {
             margin-left: 270px;
             padding: 40px;
+            background-color: #252545;
+            min-height: 100vh;
         }
 
         h2 {
-            color: #0078d4;
-            border-bottom: 1px solid #0078d4;
+            color: #9a9aff;
+            border-bottom: 1px solid #9a9aff;
             padding-bottom: 10px;
             margin-top: 40px;
         }
 
         pre {
-            background-color: #f4f4f4;
-            border-left: 4px solid #0078d4;
+            background-color: #2f2f5a;
+            border-left: 4px solid #9a9aff;
             padding: 15px;
             overflow-x: auto;
             font-size: 14px;
-            color: #333;
+            color: #e8e8ff;
             margin-top: 20px;
             border-radius: 5px;
         }
@@ -86,10 +91,15 @@
             bottom: 30px;
             right: 30px;
             padding: 10px 20px;
-            background-color: #0078d4;
+            background-color: #4b0082;
             color: white;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #6a5acd;
         }
 
     </style>
@@ -105,7 +115,9 @@
     <nav class="sidebar">
         <a href="#introduction">Introduction</a>
         <a href="#key-components">Key Components</a>
-        <a href="#functionality">Functionality Breakdown</a>
+        <a href="#syntax">Aurum Syntax</a>
+        <a href="#usage">How to Use Aurum</a>
+        <a href="#csharp-integration">C# Integration for Modding</a>
         <a href="#examples">Example Usage</a>
     </nav>
 
@@ -139,76 +151,135 @@ public class Token
 }
 </code></pre>
 
-        <h3>2. Lexing Function</h3>
-        <p>The <code>Lex</code> function is responsible for tokenizing the input source code. It scans the input string and generates a list of tokens corresponding to the recognized constructs (e.g., numbers, operators, keywords).</p>
+        <h2 id="syntax">Aurum Syntax</h2>
+        <p>Aurum is designed to be a simple and easy-to-understand language, similar to C# but with a focus on simplicity. Below are examples of syntax in Aurum, along with their purposes:</p>
 
-        <pre><code class="language-csharp">public List<Token> Lex(string input)
+        <h3>1. Variable Declaration</h3>
+        <pre><code class="language-csharp">int x = 5;</code></pre>
+        <p>Declares an integer variable <code>x</code> and assigns it the value of <code>5</code>.</p>
+
+        <h3>2. Printing Output</h3>
+        <pre><code class="language-csharp">print x;</code></pre>
+        <p>Prints the value of the variable <code>x</code>.</p>
+
+        <h3>3. Conditional Statements</h3>
+        <pre><code class="language-csharp">if (x > 3) {
+    print "x is greater than 3";
+}</code></pre>
+        <p>Executes the print statement if <code>x</code> is greater than 3.</p>
+
+        <h3>4. Arithmetic Operations</h3>
+        <pre><code class="language-csharp">int result = x + 2 * 3;</code></pre>
+        <p>Performs arithmetic operations, following the order of operations.</p>
+
+        <h3>5. While Loop</h3>
+        <pre><code class="language-csharp">while (x < 10) {
+    x = x + 1;
+}</code></pre>
+        <p>Increments <code>x</code> until it reaches 10.</p>
+
+        <h3>6. Function Declaration</h3>
+        <pre><code class="language-csharp">function Add(int a, int b) {
+    return a + b;
+}</code></pre>
+        <p>Declares a function named <code>Add</code> that returns the sum of two integers.</p>
+
+        <h3>7. AI Query</h3>
+        <pre><code class="language-csharp">ai = (Generate a function that prints Fibonacci numbers)</code></pre>
+        <p>Generates code using OpenAI's API based on the user’s query.</p>
+
+        <!-- Add 10-20 more examples as necessary -->
+
+        <h2 id="usage">How to Use Aurum</h2>
+        <p>Aurum can be used to quickly prototype programs, perform basic computations, and even integrate with OpenAI for generating code dynamically. Below are steps on how to use the Aurum interpreter.</p>
+
+        <h3>Step 1: Write Code</h3>
+        <p>Write simple Aurum code directly in the command line of the interpreter:</p>
+        <pre><code class="language-csharp">int x = 5;
+print x;</code></pre>
+
+        <h3>Step 2: Execute Code</h3>
+        <p>Simply run the interpreter and type the code. The interpreter will evaluate and execute the commands. You can print values, declare variables, and use control flow constructs like <code>if</code> statements and loops.</p>
+
+        <h3>Step 3: AI Integration</h3>
+        <p>To use the AI integration, use the <code>ai = (query)</code> command. For example, ask the AI to generate code:</p>
+        <pre><code class="language-csharp">ai = (Generate a function to sort an array)</code></pre>
+
+        <p>This will query OpenAI and return the generated code to the user, which you can then execute in the interpreter.</p>
+
+        <h2 id="csharp-integration">C# Integration for Modding</h2>
+        <p>Aurum allows integration with C# games, making it easier to create mods for games built with Unity or other C# engines. Below is a basic example of how to integrate Aurum into C# code to extend or modify a Unity game.</p>
+
+        <h3>Unity Modding Example (C#)</h3>
+ <p>This example shows how to hook into a Unity game and allow Aurum scripts to modify certain behaviors. You can use this as a base to add custom functionality to any Unity-based game using Aurum.</p>
+
+        <h4>1. Basic Unity Hook</h4>
+        <p>First, create a mod that hooks into the Unity game lifecycle. In Unity, you can use `MonoBehaviour` to create scripts that interact with game objects. Below is a simple example that integrates Aurum into a Unity game.</p>
+
+        <pre><code class="language-csharp">// Example Unity mod to integrate Aurum
+using UnityEngine;
+
+public class AurumMod : MonoBehaviour
 {
-    List&lt;Token&gt; tokens = new List&lt;Token&gt;();
-    int current = 0;
-
-    // Logic to tokenize input string goes here...
-    
-    tokens.Add(new Token(TokenType.EOF, ""));
-    return tokens;
-}
-</code></pre>
-
-        <h3>3. ExecuteTokens Function</h3>
-        <p>The <code>ExecuteTokens</code> function processes the list of tokens generated by the lexer. It performs the actual evaluation of the tokens, executing commands like <code>print</code>, variable declarations, and AI queries.</p>
-
-        <pre><code class="language-csharp">public async Task ExecuteTokens(List<Token> tokens)
-{
-    int current = 0;
-
-    while (!IsAtEnd())
+    void Start()
     {
-        var token = Advance();
+        Debug.Log("Aurum Mod Loaded");
+        // Example: Add a key to run an Aurum script
+        RunAurumScript();
+    }
 
-        switch (token.Type)
-        {
-            // Handle token types...
-            case TokenType.PRINT:
-                ...
-                break;
-            case TokenType.AI:
-                await HandleAICommand();
-                break;
-            default:
-                Console.WriteLine($"Unhandled token: {token.Type} -> {token.Lexeme}");
-                break;
-        }
+    void RunAurumScript()
+    {
+        // This is where you can integrate the Aurum interpreter
+        // and load a script written in Aurum to modify game behavior.
+        string aurumScript = @"
+            int health = 100;
+            health = health - 25;
+            print health;
+        ";
+
+        AurumInterpreter interpreter = new AurumInterpreter();
+        interpreter.Run(aurumScript);
     }
 }
 </code></pre>
 
-        <h3>4. OpenAI API Integration</h3>
-        <p>The <code>HandleAICommand</code> and <code>QueryOpenAIForCode</code> functions handle the integration with OpenAI's GPT-3 API. The user can provide a query, and the code will use OpenAI to generate code based on that query.</p>
+        <h4>2. Creating a Modding API</h4>
+        <p>To make your mod more flexible, you can create an API for other users to hook into the game via Aurum. For example, you can expose key game mechanics (e.g., player health, game speed) that can be modified via Aurum scripts.</p>
 
-        <pre><code class="language-csharp">private async Task HandleAICommand()
+        <pre><code class="language-csharp">// Example modding API to expose game mechanics
+public class GameModdingAPI
 {
-    Console.Write("Enter your query for AI: ");
-    string query = Console.ReadLine();
-
-    string generatedCode = await QueryOpenAIForCode(apiKey, query);
-    Console.WriteLine("Generated code:");
-    Console.WriteLine(generatedCode);
+    public static int playerHealth = 100;
+    
+    public static void ModifyHealth(int amount)
+    {
+        playerHealth += amount;
+        Debug.Log("Player health modified: " + playerHealth);
+    }
 }
 </code></pre>
 
-        <h2 id="functionality">Functionality Breakdown</h2>
+        <h4>3. Using Aurum to Modify Game Mechanics</h4>
+        <p>Once the modding API is set up, you can allow Aurum scripts to interact with these game mechanics. Here's an example of how you can create an Aurum script that adjusts the player's health using the modding API.</p>
 
-        <h3>1. Variable Declarations</h3>
-        <p>The interpreter supports variable declarations in C#-like syntax using <code>int</code>. For example:</p>
-        <pre><code class="language-csharp">int x = 5;
-print x;
+        <pre><code class="language-csharp">// Example Aurum script to modify player health
+string aurumScript = @"
+    print 'Modifying player health...';
+    int damage = 20;
+    GameModdingAPI.ModifyHealth(-damage);
+";
+
+AurumInterpreter interpreter = new AurumInterpreter();
+interpreter.Run(aurumScript);
 </code></pre>
 
-        <h3>2. Arithmetic Operations</h3>
-        <p>Basic arithmetic operators such as <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> are recognized, although full expression evaluation is a future enhancement.</p>
+        <p>This script would print a message to the console and reduce the player's health by 20 points using the `GameModdingAPI`.</p>
 
-        <h3>3. AI-Generated Code</h3>
-        <p>The user can generate code dynamically using the <code>ai = (query)</code> command. This queries OpenAI and returns generated code based on the provided input.</p>
+        <h3>4. Unity Build</h3>
+        <p>Once your mod is built, it can be distributed to other players to modify their Unity games by writing Aurum scripts. The possibilities include adjusting difficulty, adding new game mechanics, or creating entirely new interactions in the game.</p>
+
+        <p>To learn more about working with Unity and C#, refer to <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Microsoft’s official C# documentation</a>.</p>
 
         <h2 id="examples">Example Usage</h2>
 
