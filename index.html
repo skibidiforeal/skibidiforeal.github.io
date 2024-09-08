@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aurum Interpreter Documentation</title>
     <style>
+        /* Main body styling */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1e1e3f;
             color: #ffffff;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth; /* Enable smooth scrolling */
         }
 
+        /* Header styling */
         header {
             background-color: #4b0082;
             padding: 15px;
@@ -20,6 +23,10 @@
             text-align: left;
             font-size: 18px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
         }
 
         header h1 {
@@ -27,15 +34,20 @@
             font-size: 24px;
         }
 
+        /* Main container with sidebar and content */
         .container {
             display: flex;
+            margin-top: 70px; /* Adjust for fixed header */
         }
 
+        /* Sidebar styling */
         .sidebar {
             width: 250px;
             background-color: #3a3a65;
             height: 100vh;
-            position: fixed;
+            position: -webkit-sticky; /* Sticky sidebar */
+            position: sticky;
+            top: 0;
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
         }
@@ -48,6 +60,7 @@
             padding: 10px;
             border-radius: 4px;
             font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         .sidebar a:hover {
@@ -55,11 +68,13 @@
             color: white;
         }
 
+        /* Content styling */
         .content {
             margin-left: 270px;
             padding: 40px;
             background-color: #252545;
             min-height: 100vh;
+            width: 100%;
         }
 
         h2 {
@@ -86,6 +101,7 @@
             color: #c586c0;
         }
 
+        /* Scroll-to-top button */
         .scroll-to-top {
             position: fixed;
             bottom: 30px;
@@ -188,8 +204,6 @@ public class Token
         <pre><code class="language-csharp">ai = (Generate a function that prints Fibonacci numbers)</code></pre>
         <p>Generates code using OpenAI's API based on the user’s query.</p>
 
-        <!-- Add 10-20 more examples as necessary -->
-
         <h2 id="usage">How to Use Aurum</h2>
         <p>Aurum can be used to quickly prototype programs, perform basic computations, and even integrate with OpenAI for generating code dynamically. Below are steps on how to use the Aurum interpreter.</p>
 
@@ -211,10 +225,7 @@ print x;</code></pre>
         <p>Aurum allows integration with C# games, making it easier to create mods for games built with Unity or other C# engines. Below is a basic example of how to integrate Aurum into C# code to extend or modify a Unity game.</p>
 
         <h3>Unity Modding Example (C#)</h3>
- <p>This example shows how to hook into a Unity game and allow Aurum scripts to modify certain behaviors. You can use this as a base to add custom functionality to any Unity-based game using Aurum.</p>
-
-        <h4>1. Basic Unity Hook</h4>
-        <p>First, create a mod that hooks into the Unity game lifecycle. In Unity, you can use `MonoBehaviour` to create scripts that interact with game objects. Below is a simple example that integrates Aurum into a Unity game.</p>
+        <p>This example shows how to hook into a Unity game and allow Aurum scripts to modify certain behaviors. You can use this as a base to add custom functionality to any Unity-based game using Aurum.</p>
 
         <pre><code class="language-csharp">// Example Unity mod to integrate Aurum
 using UnityEngine;
@@ -244,9 +255,7 @@ public class AurumMod : MonoBehaviour
 }
 </code></pre>
 
-        <h4>2. Creating a Modding API</h4>
-        <p>To make your mod more flexible, you can create an API for other users to hook into the game via Aurum. For example, you can expose key game mechanics (e.g., player health, game speed) that can be modified via Aurum scripts.</p>
-
+        <h3>Creating a Modding API</h3>
         <pre><code class="language-csharp">// Example modding API to expose game mechanics
 public class GameModdingAPI
 {
@@ -259,27 +268,6 @@ public class GameModdingAPI
     }
 }
 </code></pre>
-
-        <h4>3. Using Aurum to Modify Game Mechanics</h4>
-        <p>Once the modding API is set up, you can allow Aurum scripts to interact with these game mechanics. Here's an example of how you can create an Aurum script that adjusts the player's health using the modding API.</p>
-
-        <pre><code class="language-csharp">// Example Aurum script to modify player health
-string aurumScript = @"
-    print 'Modifying player health...';
-    int damage = 20;
-    GameModdingAPI.ModifyHealth(-damage);
-";
-
-AurumInterpreter interpreter = new AurumInterpreter();
-interpreter.Run(aurumScript);
-</code></pre>
-
-        <p>This script would print a message to the console and reduce the player's health by 20 points using the `GameModdingAPI`.</p>
-
-        <h3>4. Unity Build</h3>
-        <p>Once your mod is built, it can be distributed to other players to modify their Unity games by writing Aurum scripts. The possibilities include adjusting difficulty, adding new game mechanics, or creating entirely new interactions in the game.</p>
-
-        <p>To learn more about working with Unity and C#, refer to <a href="https://docs.microsoft.com/en-us/dotnet/csharp/">Microsoft’s official C# documentation</a>.</p>
 
         <h2 id="examples">Example Usage</h2>
 
