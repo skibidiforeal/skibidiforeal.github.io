@@ -20,13 +20,9 @@
             background-color: #4b0082;
             padding: 15px;
             color: white;
-            text-align: left;
+            text-align: center;
             font-size: 18px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            top: 0;
         }
 
         header h1 {
@@ -34,43 +30,30 @@
             font-size: 24px;
         }
 
-        /* Main container with sidebar and content */
-        .container {
-            display: flex;
-            margin-top: 70px; /* Adjust for fixed header */
+        /* Navigation buttons below the header */
+        .nav-buttons {
+            text-align: center;
+            margin: 20px 0;
         }
 
-        /* Sidebar styling */
-        .sidebar {
-            width: 250px;
-            background-color: #3a3a65;
-            height: 100vh;
-            position: -webkit-sticky; /* Sticky sidebar */
-            position: sticky;
-            top: 0;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar a {
-            display: block;
-            margin: 10px 0;
-            text-decoration: none;
-            color: #d3d3ff;
-            padding: 10px;
-            border-radius: 4px;
+        .nav-buttons button {
+            background-color: #6a5acd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
 
-        .sidebar a:hover {
-            background-color: #6a5acd;
-            color: white;
+        .nav-buttons button:hover {
+            background-color: #4b0082;
         }
 
         /* Content styling */
         .content {
-            margin-left: 270px;
             padding: 40px;
             background-color: #252545;
             min-height: 100vh;
@@ -126,28 +109,27 @@
     <h1>Aurum Interpreter Documentation</h1>
 </header>
 
-<div class="container">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-        <a href="#introduction">Introduction</a>
-        <a href="#key-components">Key Components</a>
-        <a href="#syntax">Aurum Syntax</a>
-        <a href="#usage">How to Use Aurum</a>
-        <a href="#csharp-integration">C# Integration for Modding</a>
-        <a href="#examples">Example Usage</a>
-    </nav>
+<!-- Navigation buttons -->
+<div class="nav-buttons">
+    <button onclick="document.getElementById('introduction').scrollIntoView({ behavior: 'smooth' })">Introduction</button>
+    <button onclick="document.getElementById('key-components').scrollIntoView({ behavior: 'smooth' })">Key Components</button>
+    <button onclick="document.getElementById('syntax').scrollIntoView({ behavior: 'smooth' })">Aurum Syntax</button>
+    <button onclick="document.getElementById('usage').scrollIntoView({ behavior: 'smooth' })">How to Use Aurum</button>
+    <button onclick="document.getElementById('csharp-integration').scrollIntoView({ behavior: 'smooth' })">C# Integration</button>
+    <button onclick="document.getElementById('examples').scrollIntoView({ behavior: 'smooth' })">Example Usage</button>
+</div>
 
-    <!-- Main Content -->
-    <div class="content">
-        <h2 id="introduction">Introduction</h2>
-        <p>The <b>Aurum interpreter</b> is a simplified C#-based interpreter that supports basic programming constructs like arithmetic expressions, variable declarations, and conditional statements. It also features integration with OpenAI's GPT-3 model to generate code dynamically based on user-provided queries.</p>
+<!-- Main Content -->
+<div class="content">
+    <h2 id="introduction">Introduction</h2>
+    <p>The <b>Aurum interpreter</b> is a simplified C#-based interpreter that supports basic programming constructs like arithmetic expressions, variable declarations, and conditional statements. It also features integration with OpenAI's GPT-3 model to generate code dynamically based on user-provided queries.</p>
 
-        <h2 id="key-components">Key Components</h2>
+    <h2 id="key-components">Key Components</h2>
 
-        <h3>1. Token and TokenType Classes</h3>
-        <p>The <code>TokenType</code> enum represents different types of tokens in the language, such as numbers, arithmetic operators, identifiers, and AI-related commands. The <code>Token</code> class encapsulates the token type and the corresponding lexeme (text).</p>
+    <h3>1. Token and TokenType Classes</h3>
+    <p>The <code>TokenType</code> enum represents different types of tokens in the language, such as numbers, arithmetic operators, identifiers, and AI-related commands. The <code>Token</code> class encapsulates the token type and the corresponding lexeme (text).</p>
 
-        <pre><code class="language-csharp">public enum TokenType { NUMBER, PLUS, MINUS, STAR, SLASH, ASSIGN, SEMICOLON, LEFT_BRACE, RIGHT_BRACE, IF, PRINT, IDENTIFIER, INT, EOF, AI }
+    <pre><code class="language-csharp">public enum TokenType { NUMBER, PLUS, MINUS, STAR, SLASH, ASSIGN, SEMICOLON, LEFT_BRACE, RIGHT_BRACE, IF, PRINT, IDENTIFIER, INT, EOF, AI }
 
 public class Token
 {
@@ -167,67 +149,67 @@ public class Token
 }
 </code></pre>
 
-        <h2 id="syntax">Aurum Syntax</h2>
-        <p>Aurum is designed to be a simple and easy-to-understand language, similar to C# but with a focus on simplicity. Below are examples of syntax in Aurum, along with their purposes:</p>
+    <h2 id="syntax">Aurum Syntax</h2>
+    <p>Aurum is designed to be a simple and easy-to-understand language, similar to C# but with a focus on simplicity. Below are examples of syntax in Aurum, along with their purposes:</p>
 
-        <h3>1. Variable Declaration</h3>
-        <pre><code class="language-csharp">int x = 5;</code></pre>
-        <p>Declares an integer variable <code>x</code> and assigns it the value of <code>5</code>.</p>
+    <h3>1. Variable Declaration</h3>
+    <pre><code class="language-csharp">int x = 5;</code></pre>
+    <p>Declares an integer variable <code>x</code> and assigns it the value of <code>5</code>.</p>
 
-        <h3>2. Printing Output</h3>
-        <pre><code class="language-csharp">print x;</code></pre>
-        <p>Prints the value of the variable <code>x</code>.</p>
+    <h3>2. Printing Output</h3>
+    <pre><code class="language-csharp">print x;</code></pre>
+    <p>Prints the value of the variable <code>x</code>.</p>
 
-        <h3>3. Conditional Statements</h3>
-        <pre><code class="language-csharp">if (x > 3) {
+    <h3>3. Conditional Statements</h3>
+    <pre><code class="language-csharp">if (x > 3) {
     print "x is greater than 3";
 }</code></pre>
-        <p>Executes the print statement if <code>x</code> is greater than 3.</p>
+    <p>Executes the print statement if <code>x</code> is greater than 3.</p>
 
-        <h3>4. Arithmetic Operations</h3>
-        <pre><code class="language-csharp">int result = x + 2 * 3;</code></pre>
-        <p>Performs arithmetic operations, following the order of operations.</p>
+    <h3>4. Arithmetic Operations</h3>
+    <pre><code class="language-csharp">int result = x + 2 * 3;</code></pre>
+    <p>Performs arithmetic operations, following the order of operations.</p>
 
-        <h3>5. While Loop</h3>
-        <pre><code class="language-csharp">while (x < 10) {
+    <h3>5. While Loop</h3>
+    <pre><code class="language-csharp">while (x < 10) {
     x = x + 1;
 }</code></pre>
-        <p>Increments <code>x</code> until it reaches 10.</p>
+    <p>Increments <code>x</code> until it reaches 10.</p>
 
-        <h3>6. Function Declaration</h3>
-        <pre><code class="language-csharp">function Add(int a, int b) {
+    <h3>6. Function Declaration</h3>
+    <pre><code class="language-csharp">function Add(int a, int b) {
     return a + b;
 }</code></pre>
-        <p>Declares a function named <code>Add</code> that returns the sum of two integers.</p>
+    <p>Declares a function named <code>Add</code> that returns the sum of two integers.</p>
 
-        <h3>7. AI Query</h3>
-        <pre><code class="language-csharp">ai = (Generate a function that prints Fibonacci numbers)</code></pre>
-        <p>Generates code using OpenAI's API based on the user’s query.</p>
+    <h3>7. AI Query</h3>
+    <pre><code class="language-csharp">ai = (Generate a function that prints Fibonacci numbers)</code></pre>
+    <p>Generates code using OpenAI's API based on the user’s query.</p>
 
-        <h2 id="usage">How to Use Aurum</h2>
-        <p>Aurum can be used to quickly prototype programs, perform basic computations, and even integrate with OpenAI for generating code dynamically. Below are steps on how to use the Aurum interpreter.</p>
+    <h2 id="usage">How to Use Aurum</h2>
+    <p>Aurum can be used to quickly prototype programs, perform basic computations, and even integrate with OpenAI for generating code dynamically. Below are steps on how to use the Aurum interpreter.</p>
 
-        <h3>Step 1: Write Code</h3>
-        <p>Write simple Aurum code directly in the command line of the interpreter:</p>
-        <pre><code class="language-csharp">int x = 5;
+    <h3>Step 1: Write Code</h3>
+    <p>Write simple Aurum code directly in the command line of the interpreter:</p>
+    <pre><code class="language-csharp">int x = 5;
 print x;</code></pre>
 
-        <h3>Step 2: Execute Code</h3>
-        <p>Simply run the interpreter and type the code. The interpreter will evaluate and execute the commands. You can print values, declare variables, and use control flow constructs like <code>if</code> statements and loops.</p>
+    <h3>Step 2: Execute Code</h3>
+    <p>Simply run the interpreter and type the code. The interpreter will evaluate and execute the commands. You can print values, declare variables, and use control flow constructs like <code>if</code> statements and loops.</p>
 
-        <h3>Step 3: AI Integration</h3>
-        <p>To use the AI integration, use the <code>ai = (query)</code> command. For example, ask the AI to generate code:</p>
-        <pre><code class="language-csharp">ai = (Generate a function to sort an array)</code></pre>
+    <h3>Step 3: AI Integration</h3>
+    <p>To use the AI integration, use the <code>ai = (query)</code> command. For example, ask the AI to generate code:</p>
+    <pre><code class="language-csharp">ai = (Generate a function to sort an array)</code></pre>
 
-        <p>This will query OpenAI and return the generated code to the user, which you can then execute in the interpreter.</p>
+    <p>This will query OpenAI and return the generated code to the user, which you can then execute in the interpreter.</p>
 
-        <h2 id="csharp-integration">C# Integration for Modding</h2>
-        <p>Aurum allows integration with C# games, making it easier to create mods for games built with Unity or other C# engines. Below is a basic example of how to integrate Aurum into C# code to extend or modify a Unity game.</p>
+    <h2 id="csharp-integration">C# Integration for Modding</h2>
+    <p>Aurum allows integration with C# games, making it easier to create mods for games built with Unity or other C# engines. Below is a basic example of how to integrate Aurum into C# code to extend or modify a Unity game.</p>
 
-        <h3>Unity Modding Example (C#)</h3>
-        <p>This example shows how to hook into a Unity game and allow Aurum scripts to modify certain behaviors. You can use this as a base to add custom functionality to any Unity-based game using Aurum.</p>
+    <h3>Unity Modding Example (C#)</h3>
+    <p>This example shows how to hook into a Unity game and allow Aurum scripts to modify certain behaviors. You can use this as a base to add custom functionality to any Unity-based game using Aurum.</p>
 
-        <pre><code class="language-csharp">// Example Unity mod to integrate Aurum
+    <pre><code class="language-csharp">// Example Unity mod to integrate Aurum
 using UnityEngine;
 
 public class AurumMod : MonoBehaviour
@@ -255,8 +237,8 @@ public class AurumMod : MonoBehaviour
 }
 </code></pre>
 
-        <h3>Creating a Modding API</h3>
-        <pre><code class="language-csharp">// Example modding API to expose game mechanics
+    <h3>Creating a Modding API</h3>
+    <pre><code class="language-csharp">// Example modding API to expose game mechanics
 public class GameModdingAPI
 {
     public static int playerHealth = 100;
@@ -269,9 +251,9 @@ public class GameModdingAPI
 }
 </code></pre>
 
-        <h2 id="examples">Example Usage</h2>
+    <h2 id="examples">Example Usage</h2>
 
-        <pre><code class="language-csharp">> int x = 5;
+    <pre><code class="language-csharp">> int x = 5;
 Declared int x = 5
 > print x;
 5
@@ -279,7 +261,6 @@ Declared int x = 5
 Generated code:
 public void PrintFibonacci(int n) { ... }</code></pre>
 
-    </div>
 </div>
 
 <div class="scroll-to-top" onclick="scrollToTop()">Scroll to Top</div>
