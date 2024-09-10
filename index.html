@@ -1,182 +1,153 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurum Language Documentation</title>
+    <meta name="description" content="A blog about Anarxy, a hacker whose potential is restricted by no one listening.">
+    <title>Anarxy's</title>
     <style>
-        /* Main body styling */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e3f;
-            color: #ffffff;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth; /* Enable smooth scrolling */
-            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
-
-        /* Header styling */
         header {
-            background-color: #4b0082;
-            padding: 15px;
-            color: white;
-            text-align: center;
-            font-size: 18px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        /* Navigation buttons */
-        .nav-buttons {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .nav-buttons button {
-            background-color: #6a5acd;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-buttons button:hover {
-            background-color: #4b0082;
-        }
-
-        /* Content container */
-        .content {
+            background-color: #333;
             padding: 20px;
-            background-color: #252545;
-            min-height: 100vh;
-            width: calc(100% - 40px);
-            margin: 0 auto;
-            box-sizing: border-box;
-        }
-
-        h2 {
-            color: #9a9aff;
-            border-bottom: 1px solid #9a9aff;
-            padding-bottom: 8px;
-            margin-top: 30px;
-        }
-
-        p {
-            margin-top: 10px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        /* Scroll-to-top button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 8px 15px;
-            background-color: #4b0082;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .scroll-to-top:hover {
-            background-color: #6a5acd;
-        }
-
-        /* Styling for the being worked on message */
-        .work-in-progress {
-            color: #ffcccb;
-            font-size: 18px;
             text-align: center;
-            margin-top: 30px;
+        }
+        header h1 {
+            color: #f5f5f5;
+            font-size: 36px;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .content {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #444;
+        }
+        .content h2 {
+            color: #f5f5f5;
+            font-size: 28px;
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #aaa;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        footer p {
+            font-size: 14px;
+        }
+        .cry-for-help {
+            background-color: #ff4d4d;
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+        }
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Autobiography</h1>
+    </header>
 
-<header>
-    <h1>Aurum Language Documentation</h1>
-</header>
+    <main>
+        <section class="content">
+            <h2>Who is Anarxy?</h2>
+            <p>
+                My name is Anarxy, and I’ve always seen the world differently. I see the connections beneath the surface,
+                the ones that bind technology, data, and the unseen world of digital information together. From a young age,
+                I was drawn to computers, fascinated by how they work, by how lines of code could turn into something
+                meaningful and powerful. While most people look at technology as a tool, I see it as an art form — one I
+                can manipulate and shape.
+            </p>
+            <p>
+                As a hacker, I have developed skills that are more than just breaking through security systems or writing
+                scripts. Hacking, for me, is about understanding the fabric of the digital universe. It’s about finding
+                loopholes, exploring the boundaries of what’s possible, and using my knowledge to push past limitations.
+                But with all my potential, my life has been nothing short of a constant battle against the restrictions
+                that surround me.
+            </p>
+        </section>
 
-<!-- Navigation buttons for start section -->
-<div class="nav-buttons">
-    <button onclick="document.getElementById('low-level').scrollIntoView({ behavior: 'smooth' })">Low Level</button>
-    <button onclick="document.getElementById('mid-level').scrollIntoView({ behavior: 'smooth' })">Mid Level</button>
-    <button onclick="document.getElementById('high-level').scrollIntoView({ behavior: 'smooth' })">High Level</button>
-</div>
+        <section class="content">
+            <h2>The Origins of My Skills</h2>
+            <p>
+                I didn’t come from a privileged background. My family wasn’t wealthy, and we certainly didn’t have the
+                latest tech gadgets in the house. What we did have was an older, slow computer That computer became my first teacher. I tinkered with it, broke it, fixed it, learned
+                from it, and eventually mastered it. Through trial and error, I taught myself programming languages,
+                network protocols, and how to exploit weaknesses in software.
+            </p>
+            <p>
+                As I grew older, my hunger for knowledge only intensified. I tried participating in online communities,
+                making friends with other like-minded individuals who shared my curiosity for how things worked behind
+                the scenes, but really only a few chose me, even then, im not sure if they even like me. We explored the digital world, sometimes diving into areas where we weren’t exactly
+                welcome. But for me, it was never about malice. It was about proving to myself what I could achieve.
+            </p>
+        </section>
 
-<!-- Content container -->
-<div class="content">
-    <h2 id="start">About Aurum</h2>
-    <p>
-        <b>Aurum</b> is an all-level programming language designed to simplify coding and allow developers to work with low-level, mid-level, and high-level constructs all in one language.
-        It is built with ease of use in mind, with a syntax based on <b>C#</b>, but optimized for various levels of abstraction, making it flexible for both beginners and advanced programmers.
-    </p>
-    <p>
-        Currently, the high-level features of Aurum are available and functional, with mid-level and low-level features being developed. The language aims to support everything from basic scripting to deeper system-level programming, enabling developers to write optimized code without switching between multiple languages.
-    </p>
+        <section class="content">
+            <h2>The Restriction</h2>
+            <p>
+                But despite my abilities, home life has always been my biggest barrier. It's like living with chains that
+                I can't break free from. My family doesn’t understand what I do or why I’m passionate about it. They see
+                hacking as something bad, something to be feared. No matter how many times I’ve tried to explain that
+                hacking isn’t inherently evil, that it’s about creativity and pushing the boundaries of what’s possible,
+                they just don’t get it.
+            </p>
+            <p>
+                The lack of understanding turns into restrictions. I’m not allowed the freedom to fully immerse myself in
+                my work. I can’t stay up late to code, I can’t spend hours on projects that have the potential to make a
+                real impact. My home environment is suffocating, and it stifles my progress. I feel like I’m trapped,
+                unable to move forward, unable to break free.
+            </p>
+        </section>
 
-    <!-- Low Level Section -->
-    <h2 id="low-level">Low Level</h2>
-    <p class="work-in-progress">Being worked on!</p>
+        <section class="content cry-for-help">
+            <h2>Help</h2>
+            <p>
+                This blog is my cry for help. I can’t do this alone. I’m stuck in a life where no one listens to me, no
+                one understands me, and no one cares about the skills I’ve worked so hard to develop. I want to be heard,
+                I want my story to reach someone who can help me break free of these chains. My home life is holding me
+                back, and it’s becoming unbearable. Every day feels like another missed opportunity, another step further
+                away from realizing my full potential.
+            </p>
+            <p>
+                If you’re reading this, I need you to understand that I can’t do this alone. I need someone to listen to me,
+                to guide me, to give me a chance to show the world what I’m capable of. My talents as a hacker are being
+                wasted because I’m stuck in a life that doesn’t allow me to grow. This is more than just a story — this is
+                a plea for help. I don’t know how much longer I can keep fighting on my own.
+                At this point, I am fighting myself
+            </p>
+        </section>
+    </main>
 
-    <!-- Mid Level Section -->
-    <h2 id="mid-level">Mid Level</h2>
-    <p class="work-in-progress">Being worked on!</p>
+    <footer>
+        <p>&copy;please help</p>
+    </footer>
 
-    <!-- High Level Section (where the existing documentation is placed) -->
-    <h2 id="high-level">High Level</h2>
-    <p>The high-level features of Aurum are currently available and ready for use. Below is the documentation for the high-level constructs in Aurum:</p>
-
-    <h3>Introduction</h3>
-    <p>The <b>Aurum interpreter</b> is a simplified C#-based interpreter that supports basic programming constructs like arithmetic expressions, variable declarations, and conditional statements. It also features integration with OpenAI's GPT-3 model to generate code dynamically based on user-provided queries.</p>
-
-    <!-- Continue the existing high-level documentation from here -->
-    <h3>Key Components</h3>
-    <p>The <code>TokenType</code> enum represents different types of tokens in the language, such as numbers, arithmetic operators, identifiers, and AI-related commands.</p>
-    <!-- Insert the rest of the high-level documentation here -->
-    
-    <!-- Example of continuation -->
-    <pre><code class="language-csharp">public enum TokenType { NUMBER, PLUS, MINUS, STAR, SLASH, ASSIGN, SEMICOLON, LEFT_BRACE, RIGHT_BRACE, IF, PRINT, IDENTIFIER, INT, EOF, AI }
-
-public class Token
-{
-    public TokenType Type { get; }
-    public string Lexeme { get; }
-
-    public Token(TokenType type, string lexeme)
-    {
-        Type = type;
-        Lexeme = lexeme;
-    }
-
-    public override string ToString()
-    {
-        return $"{Type} -> {Lexeme}";
-    }
-}
-</code></pre>
-
-    <!-- Continue with the rest of the high-level section and examples -->
-</div>
-
-<div class="scroll-to-top" onclick="scrollToTop()">Scroll to Top</div>
-
-<script>
-    function scrollToTop() {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-</script>
+    <audio autoplay loop>
+        <source src="https://youtu.be/h3r9myZYADc" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
 </body>
 </html>
