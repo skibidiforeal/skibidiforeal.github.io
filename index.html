@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embed Blooket with External JS</title>
+    <title>Blooket Embed with JS</title>
     <style>
-        body, html {
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            height: 100%;
         }
+
         iframe {
             width: 100%;
             height: 100%;
@@ -18,38 +22,19 @@
     </style>
 </head>
 <body>
-    <h1>Embedding Blooket and Loading External JS</h1>
-    <iframe id="blooket-frame" src="https://www.blooket.com/" title="Blooket"></iframe>
+    <iframe id="blooketFrame" src="https://www.blooket.com" title="Blooket Embed"></iframe>
 
     <script>
-        const iframe = document.getElementById('blooket-frame');
+        const scriptUrl = 'https://raw.githubusercontent.com/randomstuff69/blooketpluscheats/main/GUI/Gui.js';
 
-        // Function to inject JS into the iframe
-        function injectScript() {
-            const iframeWindow = iframe.contentWindow;
-            const iframeDocument = iframe.contentDocument || iframeWindow.document;
+        // Inject the script into the iframe
+        const iframe = document.getElementById('blooketFrame');
+        iframe.onload = () => {
+            const iframeDocument = iframe.contentWindow.document;
 
-            // Create a script element
-            const script = iframeDocument.createElement('script');
-            script.src = 'https://raw.githubusercontent.com/randomstuff69/blooketpluscheats/e20d50941ef0dfa2b7791e5e4a983608fe23f785/GUI/Gui.js';
-
-            // Append the script to the iframe's head
-            iframeDocument.head.appendChild(script);
-
-            // Log successful script injection
-            script.onload = function() {
-                console.log('Script loaded successfully inside iframe!');
-            };
-
-            // Log any errors
-            script.onerror = function() {
-                console.log('Error loading script inside iframe.');
-            };
-        }
-
-        // Wait for the iframe to load and then inject the script
-        iframe.onload = function() {
-            injectScript();
+            const scriptElement = iframeDocument.createElement('script');
+            scriptElement.src = scriptUrl;
+            iframeDocument.body.appendChild(scriptElement);
         };
     </script>
 </body>
