@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Darker background */
+            color: #e0e0e0; /* Light grey text */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #2b2b2b; /* Darker container */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffcc00; /* Highlighted title */
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff; /* White label text */
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #666; /* Dark border */
+            background-color: #444; /* Darker input background */
+            color: #fff; /* White input text */
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* Blue button */
+            color: #fff; /* White button text */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .image-container img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid #666; /* Dark border around images */
+        }
+
+        .download-button {
+            margin-top: 20px;
+            background-color: #28a745; /* Green button */
+        }
+
+        .download-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        a {
+            display: block;
+            color: #ffcc00; /* Yellow for download links */
+            margin-top: 5px;
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+            color: #ffc107; /* Slightly lighter yellow on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Search</h1>
+        <div class="input-group">
+            <label for="query">What do you want to search today:</label>
+            <input type="text" id="query" placeholder="Enter search query">
+        </div>
+        <div class="input-group">
+            <label for="numImages">How many images:</label>
+            <input type="number" id="numImages" min="1" placeholder="Enter number of images">
+        </div>
+        <div class="input-group">
+            <label for="numPages">How many pages to search:</label>
+            <input type="number" id="numPages" min="1" placeholder="Enter number of pages">
+        </div>
+        <button id="searchButton">Search</button>
+        <button class="download-button" id="downloadButton">Download All</button>
+        <div id="imageContainer" class="image-container"></div>
+    </div>
+    <script>
+        let imageUrls = [];
+
+        document.getElementById('searchButton').addEventListener('click', async () => {
+            const query = document.getElementById('query').value.trim();
+            const numImages = parseInt(document.getElementById('numImages').value);
+            const numPages = parseInt(document.getElementById('numPages').value);
+            const imageContainer = document.getElementById('imageContainer');
+
+            if (!query || isNaN(numImages) || isNaN(numPages) || numImages <= 0 || numPages <= 0) {
+                alert('Please enter valid input values.');
+                return;
+            }
+
+            imageContainer.innerHTML = ''; // Clear previous images
+            imageUrls = []; // Clear previous URLs
+
+            for (let page = 1; page <= numPages; page++) {
+                const apiUrl = `https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&tags=${query}&limit=${numImages}&pid=${page}`;
+
+                try {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    const fetchPromises = data.map(async post => {
+                        const img = document.createElement('img');
+                        img.src = post.file_url;
+                        img.alt = 'Image';
+                        imageContainer.appendChild(img);
+                        imageUrls.push(post.file_url); // Store image URLs
+
+                        // Fetch the image and return as a Blob
+                        const imageResponse = await fetch(post.file_url);
+                        return imageResponse.blob().then(blob => {
+                            const filename = post.file_url.split('/').pop();
+                            return { filename, blob };
+                        });
+                    });
+
+                    // Wait for all image fetches to complete
+                    const images = await Promise.all(fetchPromises);
+                    images.forEach(({ filename, blob }) => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = filename;
+                        a.textContent = `Download ${filename}`;
+                        imageContainer.appendChild(a);
+                    });
+                } catch (error) {
+                    console.error('Error fetching images:', error);
+                }
+            }
+        });
+
+        document.getElementById('downloadButton').addEventListener('click', async () => {
+            const zip = new JSZip();
+            const folder = zip.folder("Images");
+
+            // Add images to the zip
+            const fetchPromises = imageUrls.map(async url => {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const filename = url.split('/').pop();
+                folder.file(filename, blob);
+            });
+
+            // Wait for all images to be added to the zip
+            await Promise.all(fetchPromises);
+
+            zip.generateAsync({ type: "blob" })
+                .then(content => {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = 'Images.zip';
+                    link.click();
+                });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</body>
+</html>
