@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Search</title>
+    <title>Image Search with Tabs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,6 +21,36 @@
             background: #2b2b2b; /* Darker container */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Tab bar styling */
+        .tab-bar {
+            display: flex;
+            background-color: #333;
+            border-bottom: 2px solid #666;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .tab {
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: #444;
+            border-bottom: 4px solid #ffcc00;
+        }
+
+        /* Hide sections initially */
+        .tab-content {
+            display: none;
+        }
+
+        /* Show active section */
+        .tab-content.active {
+            display: block;
         }
 
         h1 {
@@ -97,28 +127,90 @@
             text-decoration: underline; /* Underline on hover */
             color: #ffc107; /* Slightly lighter yellow on hover */
         }
+
+        /* Video styling */
+        .video-container {
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            max-width: 600px;
+            margin: 10px 0;
+            border: 2px solid #666;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Image Search</h1>
-        <div class="input-group">
-            <label for="query">What do you want to search today:</label>
-            <input type="text" id="query" placeholder="Enter search query">
+        <!-- Tab bar -->
+        <div class="tab-bar">
+            <div class="tab active" data-tab="search">R34 Search</div>
+            <div class="tab" data-tab="videos">Videos</div>
         </div>
-        <div class="input-group">
-            <label for="numImages">How many images:</label>
-            <input type="number" id="numImages" min="1" placeholder="Enter number of images">
+
+        <!-- Tab content for Image Search -->
+        <div class="tab-content active" id="search">
+            <h1>Image Search</h1>
+            <div class="input-group">
+                <label for="query">What do you want to search today:</label>
+                <input type="text" id="query" placeholder="Enter search query">
+            </div>
+            <div class="input-group">
+                <label for="numImages">How many images:</label>
+                <input type="number" id="numImages" min="1" placeholder="Enter number of images">
+            </div>
+            <div class="input-group">
+                <label for="numPages">How many pages to search:</label>
+                <input type="number" id="numPages" min="1" placeholder="Enter number of pages">
+            </div>
+            <button id="searchButton">Search</button>
+            <button class="download-button" id="downloadButton">Download All</button>
+            <div id="imageContainer" class="image-container"></div>
         </div>
-        <div class="input-group">
-            <label for="numPages">How many pages to search:</label>
-            <input type="number" id="numPages" min="1" placeholder="Enter number of pages">
+
+        <!-- Tab content for Videos -->
+        <div class="tab-content" id="videos">
+            <h1>Videos</h1>
+            <div class="video-container">
+                <video controls>
+                    <source src="1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video controls>
+                    <source src="2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video controls>
+                    <source src="3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
-        <button id="searchButton">Search</button>
-        <button class="download-button" id="downloadButton">Download All</button>
-        <div id="imageContainer" class="image-container"></div>
     </div>
+
     <script>
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const targetTab = tab.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // JavaScript for search functionality (same as your original script)
         let imageUrls = [];
 
         document.getElementById('searchButton').addEventListener('click', async () => {
